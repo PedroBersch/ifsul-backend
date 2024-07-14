@@ -3,6 +3,9 @@ package br.com.example.trabalhobackend.controller;
 import br.com.example.trabalhobackend.model.Product;
 import br.com.example.trabalhobackend.model.ProductList;
 import br.com.example.trabalhobackend.service.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +17,20 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/product")
+@Tag(name = "Produto", description = "CRUD de Produto")
 public class ProductController {
     @Autowired
     ProductService service;
 
-    @PostMapping
+
+    @Operation(
+        summary = "Cadastra produto",
+        description = "Cadastra produto e retorna cadastrado da base de dados."
+    )
+    @ApiResponse(
+        responseCode = "201",description = "Cadastro com sucesso"
+    )
+    @PostMapping(produces = "application/json")
     public ResponseEntity<Product> createProduct(@RequestBody Product product){
         Product p = service.save(product);
         return new ResponseEntity<>(p, HttpStatus.CREATED);
