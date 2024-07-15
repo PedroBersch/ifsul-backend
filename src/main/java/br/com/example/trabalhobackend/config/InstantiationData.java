@@ -24,8 +24,10 @@ public class InstantiationData implements CommandLineRunner {
 
         String adminPassword = new BCryptPasswordEncoder().encode("admin");
         String userPassword = new BCryptPasswordEncoder().encode("user");
+        String testPassword = new BCryptPasswordEncoder().encode("teste");
         userRepository.save(new User("admin",adminPassword, Role.ADMIN));
         userRepository.save(new User("user",userPassword, Role.USER));
+        userRepository.save(new User("teste",testPassword, Role.USER));
 
         productRepository.save(new Product(faker.commerce().productName(), faker.number().randomDouble(2, 100, 1000)));
         productRepository.save(new Product(faker.commerce().productName(), faker.number().randomDouble(2, 100, 1000)));
