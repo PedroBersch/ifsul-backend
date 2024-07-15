@@ -20,11 +20,12 @@ A API foi construída utilizando as seguintes tecnologias principais:
 
 ****
 
-## /register
+## /auth/register
 
 Registro de Usuário
 
-Método: POST  
+### Método: POST
+
 **Descrição**: Registra um novo usuário e retorna uma mensagem de sucesso.
 
 #### Request:
@@ -39,21 +40,18 @@ Método: POST
 
 #### Response de Sucesso:
 
-**Status Code**: 201 Created  
-**Descrição**: Cadastro com sucesso  
-**Exemplo**:
-
 ````json
 {
   "message": "Usuario registrado com sucesso"
 }
 ````
 
-## /login
+## /auth/login
 
 Login de Usuário
 
-**Método:** POST
+### Método: POST
+
 **Descrição:** Realiza o login do usuário e retorna um token JWT.
 
 #### Request:
@@ -63,16 +61,9 @@ Login de Usuário
   "email": "string",
   "password": "string"
 }
-
 ````
 
 #### Response de Sucesso:
-
-**Status Code**: 200 OK
-Exemplo:
-
-json
-Copiar código
 
 ````json
 {
@@ -81,13 +72,13 @@ Copiar código
 ````
 
 ## /product
-## /products
-Criar Produto
 
-Método: POST  
+### Método: POST
+
 **Descrição**: Cria um novo produto com as informações fornecidas.
 
 #### Request:
+
 ```json
 {
   "name": "Nome do Produto",
@@ -95,14 +86,21 @@ Método: POST
 }
 ```
 
-Método: GET  
+#### Response de Sucesso
+
+````json
+{
+  "id": 1,
+  "name": "Nome do produto",
+  "price": 9.99
+}
+````
+
+### Método: GET
+
 **Descrição**: Retorna todos os produtos cadastrados.
 
 #### Response de Sucesso:
-
-**Status Code**: 200 OK  
-**Descrição**: Produtos retornados com sucesso  
-**Exemplo**:
 
 ```json
 {
@@ -121,19 +119,19 @@ Método: GET
   ]
 }
 ```
-## /products/{id}
-Obter Produto por ID
 
-Método: GET  
-**Descrição**: Retorna um produto específico baseado no ID fornecido.
+## /products/:id
 
 #### Parâmetros de Path:
+
 - `id` (integer): ID do produto a ser recuperado.
 
+### Método: GET
+
+**Descrição**: Retorna um produto específico baseado no ID fornecido.
+
 #### Response de Sucesso:
-**Status Code**: 200 OK  
-**Descrição**: Produto retornado com sucesso  
-**Exemplo**:
+
 ```json
 {
   "id": 1,
@@ -141,11 +139,7 @@ Método: GET
   "price": 99.99
 }
 ```
-
-## /product/{id}
-Atualizar Produto
-
-Método: PUT  
+### Método: PUT  
 **Descrição**: Atualiza as informações de um produto existente com base no ID fornecido.
 
 #### Request:
@@ -156,15 +150,15 @@ Método: PUT
 }
 ````
 
-## /product/{id}
-Deletar Produto
-
-Método: DELETE  
+#### Método: DELETE  
 **Descrição**: Remove um produto existente com base no ID fornecido.
 
 #### Response de Sucesso:
-**Status Code**: 204 No Content  
-**Descrição**: Produto deletado com sucesso
+```json
+{
+  "message": "DELETED. Product with id: 1"
+}
+```
 
 
 
