@@ -14,16 +14,21 @@ A API foi construída utilizando as seguintes tecnologias principais:
 - JWT (JSON Web Token): Para a geração e validação de tokens de autenticação.
 - Swagger: Para documentação e teste da API.
 # Endpoints
-- [Registrar Usuario](#registrar-usuario)
+- [Registra Usuario](#registra-usuario)
+- [Login de Usuário](#login-de-usuário)
+- [Cadastra Produto](#cadastra-produto)
+- [Remove Produto](#remove-produto)
+- [Obtem Produto](#obtem-produto)
+- [Obtem todos Produtos](#obtem-todos-produtos)
+- [Atualiza Produto](#autaliza-produto)
 
-## Registrar Usuario
+## Registra Usuario
 /auth/register
 ### Método: POST
 
 **Descrição**: Registra um novo usuário e retorna uma mensagem de sucesso.
 
 #### Request:
-
 ````Json
 {
   "email": "string",
@@ -40,23 +45,17 @@ A API foi construída utilizando as seguintes tecnologias principais:
 }
 ````
 
-## /auth/login
-
-Login de Usuário
-
+## Login de Usuário
+/auth/login
 ### Método: POST
-
 **Descrição:** Realiza o login do usuário e retorna um token JWT.
-
 #### Request:
-
 ````json
 {
   "email": "string",
   "password": "string"
 }
 ````
-
 #### Response de Sucesso:
 
 ````json
@@ -65,7 +64,8 @@ Login de Usuário
 }
 ````
 
-## /product
+## Cadastra produto
+/product
 
 ### Método: POST
 
@@ -89,7 +89,7 @@ Login de Usuário
   "price": 9.99
 }
 ````
-
+## Obtem Todos Produtos
 ### Método: GET
 
 **Descrição**: Retorna todos os produtos cadastrados.
@@ -113,8 +113,8 @@ Login de Usuário
   ]
 }
 ```
-
-## /products/:id
+## Obtem Produto
+/products/:id
 
 #### Parâmetros de Path:
 
@@ -133,6 +133,9 @@ Login de Usuário
   "price": 99.99
 }
 ```
+## Atualiza produto
+/products/:id
+
 ### Método: PUT  
 **Descrição**: Atualiza as informações de um produto existente com base no ID fornecido.
 
@@ -143,8 +146,10 @@ Login de Usuário
   "price": 129.99
 }
 ````
+## Remove produto
+/products/:id
+### Método: DELETE  
 
-#### Método: DELETE  
 **Descrição**: Remove um produto existente com base no ID fornecido.
 
 #### Response de Sucesso:
