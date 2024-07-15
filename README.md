@@ -1,13 +1,11 @@
 # Produtos API
 
-****
 Este projeto é uma API simples desenvolvida com Java Spring para fins acadêmicos, abordando disciplinas de frameworks
 backend e serviços web.  
 Futuramente, pretende-se usar esta aplicação como integração para as matérias de Mobile 2 e frameworks de frontend.
 
 ## Overview
 
-****
 A API foi construída utilizando as seguintes tecnologias principais:
 
 - Java Spring Boot: Framework principal para a criação da API.
@@ -15,15 +13,11 @@ A API foi construída utilizando as seguintes tecnologias principais:
 - Spring Security: Para autenticação e autorização.
 - JWT (JSON Web Token): Para a geração e validação de tokens de autenticação.
 - Swagger: Para documentação e teste da API.
-
 # Endpoints
+- [Registrar Usuario](#registrar-usuario)
 
-****
-
-## /auth/register
-
-Registro de Usuário
-
+## Registrar Usuario
+/auth/register
 ### Método: POST
 
 **Descrição**: Registra um novo usuário e retorna uma mensagem de sucesso.
