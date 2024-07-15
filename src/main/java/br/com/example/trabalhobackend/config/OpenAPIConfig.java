@@ -13,8 +13,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
-import static org.apache.tomcat.websocket.BasicAuthenticator.schemeName;
-
 @Configuration
 public class OpenAPIConfig {
     private String rootUrl = "http://localhost:8080";
