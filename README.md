@@ -13,6 +13,13 @@ A API foi construída utilizando as seguintes tecnologias principais:
 - Spring Security: Para autenticação e autorização.
 - JWT (JSON Web Token): Para a geração e validação de tokens de autenticação.
 - Swagger: Para documentação e teste da API.
+
+# Instruções para utilizar
+- Clone o repositorio
+```bash
+git clone https://github.com/PedroBersch/ifsul-backend.git
+```
+
 # Endpoints
 - [Registra Usuario](#registra-usuario)
 - [Login de Usuário](#login-de-usuário)
@@ -114,7 +121,7 @@ A API foi construída utilizando as seguintes tecnologias principais:
 }
 ```
 ## Obtem Produto
-/products/:id
+/product/:id
 
 #### Parâmetros de Path:
 
@@ -134,7 +141,7 @@ A API foi construída utilizando as seguintes tecnologias principais:
 }
 ```
 ## Atualiza produto
-/products/:id
+/product/:id
 
 ### Método: PUT  
 **Descrição**: Atualiza as informações de um produto existente com base no ID fornecido.
@@ -147,7 +154,7 @@ A API foi construída utilizando as seguintes tecnologias principais:
 }
 ````
 ## Remove produto
-/products/:id
+/product/:id
 ### Método: DELETE  
 
 **Descrição**: Remove um produto existente com base no ID fornecido.
