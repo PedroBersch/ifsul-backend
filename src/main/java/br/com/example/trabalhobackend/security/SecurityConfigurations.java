@@ -24,16 +24,24 @@ public class SecurityConfigurations {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
             .csrf(csrf -> csrf.disable())
+            .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
+            .headers(httpSecurityHeadersConfigurer -> {
+                httpSecurityHeadersConfigurer.frameOptions(frameOptionsConfig -> {
+                    frameOptionsConfig.disable();
+                });
+            })
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/v3/api-docs", "/swagger-resources/**").permitAll()
+                .requestMatchers("/h2-console/**","/h2-console").permitAll()
                 .requestMatchers(HttpMethod.POST, "/product").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
             .build();
+
     }
 
     @Bean
