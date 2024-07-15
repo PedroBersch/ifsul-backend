@@ -14,8 +14,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,15 +30,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
+@Tag(name = "Usuario")
+@RequiredArgsConstructor
 public class AuthenticationController {
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private TokenService tokenService;
+    private final AuthenticationManager authenticationManager;
+    private final UserRepository userRepository;
+    private final TokenService tokenService;
 
     @Operation(summary = "Realiza login", description = "Autoriza usuario e retorna token.")
     @SecurityRequirements(value = {})
@@ -57,8 +55,8 @@ public class AuthenticationController {
             responseCode = "201",
             description = "Cadastro com sucesso",
             content = @Content(mediaType = "application/json",
-            schema = @Schema(implementation = MessageResponse.class),
-            examples = @ExampleObject(value = "{\"message\": \"Usuario registrado com sucesso\"}"))),
+                schema = @Schema(implementation = MessageResponse.class),
+                examples = @ExampleObject(value = "{\"message\": \"Usuario registrado com sucesso\"}"))),
     })
     @SecurityRequirements(value = {})
     @PostMapping("/register")
