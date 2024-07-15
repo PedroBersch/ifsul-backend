@@ -38,11 +38,13 @@ public class SecurityConfigurations {
     }
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/v3/api-docs",
+        return (web) -> web.ignoring().requestMatchers(
+            "/v3/api-docs",
             "/v3/api-docs/**",
             "/swagger-resources/**",
             "/swagger-ui/**");
     }
+    
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
