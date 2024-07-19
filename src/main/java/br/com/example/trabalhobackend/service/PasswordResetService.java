@@ -22,7 +22,7 @@ public class PasswordResetService {
         PasswordResetToken myToken = new PasswordResetToken();
         myToken.setToken(token);
         myToken.setUser(user);
-        myToken.setExpiryDate(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24)); // 24 hours expiration
+        myToken.setExpiryDate(new Date(System.currentTimeMillis() + 1000 * 60 * 30)); // 24 hours expiration
         tokenRepository.save(myToken);
     }
 
