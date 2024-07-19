@@ -6,6 +6,7 @@ import br.com.example.trabalhobackend.model.ResetPasswordResponse;
 import br.com.example.trabalhobackend.model.User;
 import br.com.example.trabalhobackend.model.response.MessageResponse;
 import br.com.example.trabalhobackend.repository.UserRepository;
+import br.com.example.trabalhobackend.service.EmailSenderService;
 import br.com.example.trabalhobackend.service.PasswordResetService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -31,7 +32,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class PasswordResetController {
     private final PasswordResetService passwordResetService;
-
+    private final EmailSenderService senderService;
     @Operation(
         summary = "Esqueci minha senha",
         description = "Gera um token de redefinição de senha para o usuário",
@@ -61,14 +62,16 @@ public class PasswordResetController {
     public ResponseEntity<?> forgotPassword(@RequestBody ForgetPasswordRequest email) {
         User user = (User) userRepository.findByEmail(email.getEmail());
         if (user == null) {
-
             return ResponseEntity.badRequest().body(new MessageResponse("Usuario não encontrado"));
         }
 
         String token = UUID.randomUUID().toString();
         passwordResetService.createPasswordResetTokenForUser(user, token);
 
-        return ResponseEntity.ok(new ResetPasswordResponse("Email enviado para recuperar senha.", token));
+        senderService.sendEmail(email.getEmail(),"FORGOT PASSWORD TOKEN",
+            "Aqui esta seu token: " + token + "\n nao compartilhe com ninguem e é nois");
+
+        return ResponseEntity.ok(new MessageResponse("Email enviado para recuperar senha."));
     }
 
     private final UserRepository userRepository;
