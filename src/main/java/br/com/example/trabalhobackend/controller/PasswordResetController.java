@@ -33,6 +33,8 @@ import java.util.UUID;
 public class PasswordResetController {
     private final PasswordResetService passwordResetService;
     private final EmailSenderService senderService;
+    private final UserRepository userRepository;
+
     @Operation(
         summary = "Esqueci minha senha",
         description = "Gera um token de redefinição de senha para o usuário",
@@ -73,8 +75,21 @@ public class PasswordResetController {
 
         return ResponseEntity.ok(new MessageResponse("Email enviado para recuperar senha."));
     }
+    @SecurityRequirements(value = {})
+    @PostMapping("/local/forgot-password")
+    public ResponseEntity<?> forgotPasswordLocal(@RequestBody ForgetPasswordRequest email) {
+        User user = (User) userRepository.findByEmail(email.getEmail());
+        if (user == null) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Usuario não encontrado"));
+        }
 
-    private final UserRepository userRepository;
+        String token = UUID.randomUUID().toString();
+        passwordResetService.createPasswordResetTokenForUser(user, token);
+
+        return ResponseEntity.ok(new ResetPasswordResponse("Email enviado para recuperar senha.",token));
+    }
+
+
 
     @Operation(
         summary = "Redefinir senha",
