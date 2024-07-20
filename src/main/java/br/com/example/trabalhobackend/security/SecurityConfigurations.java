@@ -37,6 +37,7 @@ public class SecurityConfigurations {
                 .requestMatchers(HttpMethod.POST, "/auth/forgot-password").permitAll()
                 .requestMatchers(HttpMethod.POST, "/auth/reset-password").permitAll()
                 .requestMatchers(HttpMethod.POST, "/auth/local/forgot-password").permitAll()
+                .requestMatchers( "/").permitAll()
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/v3/api-docs", "/swagger-resources/**").permitAll()
                 .requestMatchers("/h2-console/**","/h2-console").permitAll()
                 .requestMatchers(HttpMethod.POST, "/product").hasRole("ADMIN")

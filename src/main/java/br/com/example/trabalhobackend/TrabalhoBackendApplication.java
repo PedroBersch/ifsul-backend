@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @OpenAPIDefinition(servers = {
     @Server(url = "/", description = "Default Server URL")
 })
+
 @RequiredArgsConstructor
 @SpringBootApplication
 public class TrabalhoBackendApplication {

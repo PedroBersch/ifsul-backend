@@ -2,7 +2,7 @@ package br.com.example.trabalhobackend.controller;
 
 import br.com.example.trabalhobackend.model.Product;
 import br.com.example.trabalhobackend.model.ProductList;
-import br.com.example.trabalhobackend.model.response.MessageResponse;
+import br.com.example.trabalhobackend.model.response.MessageResponseDto;
 import br.com.example.trabalhobackend.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -16,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -128,9 +127,9 @@ public class ProductController {
                     """)))
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<MessageResponse> deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<MessageResponseDto> deleteProduct(@PathVariable Long id) {
         service.delete(id);
-        return new ResponseEntity<>(new MessageResponse("Produto deletado com Id: " + id), HttpStatus.OK);
+        return new ResponseEntity<>(new MessageResponseDto("Produto deletado com Id: " + id), HttpStatus.OK);
     }
 
     @Operation(
@@ -150,8 +149,8 @@ public class ProductController {
                     """)))
     })
     @PutMapping("/{id}")
-    public ResponseEntity<MessageResponse> updateProduct(@PathVariable Long id, @RequestBody Product product) {
+    public ResponseEntity<MessageResponseDto> updateProduct(@PathVariable Long id, @RequestBody Product product) {
         service.update(id, product);
-        return new ResponseEntity<>(new MessageResponse("Produto atualizado com Id: " + id ), HttpStatus.OK);
+        return new ResponseEntity<>(new MessageResponseDto("Produto atualizado com Id: " + id ), HttpStatus.OK);
     }
 }

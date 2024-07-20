@@ -4,7 +4,7 @@ import br.com.example.trabalhobackend.model.AuthenticationRequest;
 import br.com.example.trabalhobackend.model.LoginResponse;
 import br.com.example.trabalhobackend.model.RegisterRequest;
 import br.com.example.trabalhobackend.model.User;
-import br.com.example.trabalhobackend.model.response.MessageResponse;
+import br.com.example.trabalhobackend.model.response.MessageResponseDto;
 import br.com.example.trabalhobackend.repository.UserRepository;
 import br.com.example.trabalhobackend.security.TokenService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -55,12 +55,12 @@ public class AuthenticationController {
             responseCode = "201",
             description = "Cadastro com sucesso",
             content = @Content(mediaType = "application/json",
-                schema = @Schema(implementation = MessageResponse.class),
+                schema = @Schema(implementation = MessageResponseDto.class),
                 examples = @ExampleObject(value = "{\"message\": \"Usuario registrado com sucesso\"}"))),
     })
     @SecurityRequirements(value = {})
     @PostMapping("/register")
-    public ResponseEntity<MessageResponse> register(@RequestBody @Valid RegisterRequest registerRequest) {
+    public ResponseEntity<MessageResponseDto> register(@RequestBody @Valid RegisterRequest registerRequest) {
         if (userRepository.findByEmail(registerRequest.getEmail()) != null)
             return ResponseEntity.badRequest().build();
 
@@ -69,6 +69,6 @@ public class AuthenticationController {
 
         userRepository.save(newUser);
 
-        return new ResponseEntity<>(new MessageResponse("Usuario registrado com sucesso"), HttpStatus.CREATED);
+        return new ResponseEntity<>(new MessageResponseDto("Usuario registrado com sucesso"), HttpStatus.CREATED);
     }
 }
